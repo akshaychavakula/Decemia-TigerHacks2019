@@ -12,14 +12,20 @@ class Login extends Component {
     this.userSession.redirectToSignIn();
   }
 
+  //    <img src={logo} className="App-logo" alt="logo" />
   render() {
     return (
-      <button
-        className="btn btn-lg btn-primary btn-block"
-        onClick={this.signIn.bind(this)}
-      >
-        Sign in with Blockstack
-      </button>
+      <div className="App">
+        <header className="App-header">
+          <p>Login to Decemia.</p>
+          <button
+            className="btn btn-lg btn-primary btn-block"
+            onClick={this.signIn.bind(this)}
+          >
+            Sign in with Blockstack
+          </button>
+        </header>
+      </div>
     );
   }
 }
