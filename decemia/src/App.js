@@ -23,7 +23,7 @@ function App() {
           <Login />
         </Route>
         <Route exact={true} path="/dashboard">
-          <div>Hello</div>
+          <Dashboard />
         </Route>
         <Route exact={true} path="/upload">
           <Upload />
