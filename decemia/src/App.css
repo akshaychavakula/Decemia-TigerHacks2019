@@ -9,6 +9,10 @@
   font-size: calc(10px + 2vmin);
 }
 
+.App {
+  background-color: rgb(226, 232, 240);
+}
+
 .Card {
   background-color: white;
   padding: 32px;

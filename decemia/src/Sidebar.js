@@ -7,6 +7,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import PublishIcon from "@material-ui/icons/Publish";
 import DraftsIcon from "@material-ui/icons/Drafts";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Avatar from "@material-ui/core/Avatar";
+import MUIcon from "./muhealth.png";
+
+const blockstack = require("blockstack");
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,10 +28,17 @@ function ListItemLink(props) {
 class SideBar extends React.Component {
   constructor() {
     super();
+    this.state = {
+      user: {}
+    };
   }
 
   goUpload() {
     window.location.href = "/upload";
+  }
+
+  componentWillMount() {
+    this.setState({ user: blockstack.loadUserData() });
   }
 
   render() {
@@ -48,6 +60,15 @@ class SideBar extends React.Component {
               <DraftsIcon />
             </ListItemIcon>
             <ListItemText primary="Drafts" />
+          </ListItem>
+          <ListItem button>
+            <ListItemAvatar>
+              <Avatar
+                alt="Travis Howard"
+                src="https://logo.clearbit.com/muhealth.org"
+              />
+            </ListItemAvatar>
+            <ListItemText primary={this.state.user.profile.name} />
           </ListItem>
         </List>
         <Divider />

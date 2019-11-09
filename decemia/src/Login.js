@@ -16,7 +16,7 @@ class Login extends Component {
   componentWillMount() {
     const session = this.userSession;
     if (session.isUserSignedIn()) {
-      window.location.href = "/upload";
+      window.location.href = "/dashboard";
     }
   }
 

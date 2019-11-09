@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { UserSession, AppConfig } from "blockstack";
-import Navbar from "./Navbar";
 import Review from "./Review";
 import Card from "@material-ui/core/Card";
-import Journals from "./Journals";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -34,9 +32,7 @@ class Dashboard extends Component {
             </div>
           </Grid>
           <Grid item xs={6} sm={7}>
-            <Paper>
-              <Review id="ABCD" />
-            </Paper>
+            <Review id="ABCD" />
           </Grid>
           <Grid item xs={6} sm={3}>
             <Paper></Paper>
