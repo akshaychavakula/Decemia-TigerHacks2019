@@ -4,6 +4,7 @@ import './App.css';
 import Login from './Login'
 import Dashboard from './Dashboard'
 import Upload from './upload/upload'
+import Display from './display/Display'
 
 import {
   BrowserRouter as Router,
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact={true} path="/upload">
           <Upload/>
+        </Route>
+        <Route exact={true} path="/display">
+          <Display/>
         </Route>
 
       </Switch>
