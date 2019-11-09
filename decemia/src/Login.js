@@ -15,13 +15,8 @@ class Login extends Component {
 
   componentWillMount() {
     const session = this.userSession;
-    if (!session.isUserSignedIn() && session.isSignInPending()) {
-      session.handlePendingSignIn().then(userData => {
-        if (!userData.username) {
-          throw new Error("This app requires a username.");
-        }
-        window.location = `/kingdom/${userData.username}`;
-      });
+    if (session.isUserSignedIn()) {
+      window.location.href = "/upload";
     }
   }
 

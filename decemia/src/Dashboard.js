@@ -17,13 +17,7 @@ class Dashboard extends Component {
 
   //    <img src={logo} className="App-logo" alt="logo" />
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>Login to Decemia.</p>
-        </header>
-      </div>
-    );
+    return <div className="App"></div>;
   }
 }
 export default Dashboard;
