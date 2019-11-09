@@ -16,10 +16,7 @@ const blockstack = require('blockstack');
 
 function App() {
 
-  if (blockstack.isUserSignedIn()) {
-    window.location.href = '/dashboard';
-    //Go to active user page.
-  }
+
   return (
     <Router>
       <Switch>
