@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Login from './Login'
+import Dashboard from './Dashboard'
 
 import {
   BrowserRouter as Router,
@@ -16,13 +17,17 @@ const blockstack = require('blockstack');
 function App() {
 
   if (blockstack.isUserSignedIn()) {
+    window.location.href = '/dashboard';
     //Go to active user page.
   }
   return (
     <Router>
       <Switch>
-        <Route path="/">
+        <Route exact={true} path="/">
           <Login />
+        </Route>
+        <Route exact={true} path="/dashboard">
+          <div>Hello</div>
         </Route>
 
       </Switch>
