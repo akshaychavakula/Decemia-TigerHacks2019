@@ -4,7 +4,7 @@ import './App.css';
 import Login from './Login'
 import Dashboard from './Dashboard'
 import Upload from './upload/upload'
-
+import Review from './Review'
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,8 +12,6 @@ import {
   Link
 } from "react-router-dom";
 
-
-const blockstack = require('blockstack');
 
 function App() {
 
@@ -28,9 +26,11 @@ function App() {
           <div>Hello</div>
         </Route>
         <Route exact={true} path="/upload">
-          <Upload/>
+          <Upload />
         </Route>
-
+        <Route exact={true} path="/review">
+          <Review id="ABCD" />
+        </Route>
       </Switch>
     </Router>
   );
