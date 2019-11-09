@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './Login'
 import Dashboard from './Dashboard'
+import Upload from './upload/upload'
 
 import {
   BrowserRouter as Router,
@@ -26,10 +27,13 @@ function App() {
         <Route exact={true} path="/dashboard">
           <div>Hello</div>
         </Route>
+        <Route exact={true} path="/upload">
+          <Upload/>
+        </Route>
 
       </Switch>
     </Router>
   );
 }
 
-export default App;
+export default App
