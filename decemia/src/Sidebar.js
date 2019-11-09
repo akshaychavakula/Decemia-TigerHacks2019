@@ -63,10 +63,7 @@ class SideBar extends React.Component {
           </ListItem>
           <ListItem button>
             <ListItemAvatar>
-              <Avatar
-                alt="Travis Howard"
-                src="https://logo.clearbit.com/muhealth.org"
-              />
+              <Avatar alt="" src="https://logo.clearbit.com/muhealth.org" />
             </ListItemAvatar>
             <ListItemText primary={this.state.user.profile.name} />
           </ListItem>
