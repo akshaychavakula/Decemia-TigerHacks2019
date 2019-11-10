@@ -8,6 +8,7 @@
     "blockstack": "^19.3.0",
     "blockstack-signin-btn": "^1.0.3",
     "crypto-js": "^3.1.9-1",
+    "material-ui": "^1.0.0-beta.47",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-pdf": "^4.1.0",

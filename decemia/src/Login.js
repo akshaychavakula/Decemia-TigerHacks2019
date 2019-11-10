@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { UserSession, AppConfig } from "blockstack";
 import "./Login.css"
-import Grid from "@material-ui/core/Grid";
+// import Grid from "@material-ui/core/Grid";
 const blockstack = require("blockstack");
 
 class Login extends Component {
@@ -16,9 +16,9 @@ class Login extends Component {
     this.userSession.redirectToSignIn();
   }
 
-  componentWillMount() {
-    const session = this.userSession;
-  }
+  // componentWillMount() {
+  //   const session = this.userSession;
+  // }
 
   componentDidMount() {
     const session = this.userSession;

@@ -6,7 +6,7 @@ import { UserSession, AppConfig } from "blockstack";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "../Sidebar";
-import Display from "../display/Display";
+// import Display from "../display/Display";
 import Card from "@material-ui/core/Card";
 const MD5 = require("crypto-js/md5");
 const blockstack = require("blockstack");

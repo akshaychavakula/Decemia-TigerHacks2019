@@ -1,22 +1,17 @@
 import React, { Component } from "react";
-import { UserSession, AppConfig } from "blockstack";
-import Paper from "@material-ui/core/Paper";
+// import { UserSession, AppConfig } from "blockstack";
+// import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "./Sidebar";
 import Display from "./display/Display";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { red, green } from '@material-ui/core/colors';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.pallete.text.secondary,
-  },
-}));
+const redTheme = createMuiTheme({palette: { primary: red}})
+const greenTheme = createMuiTheme({palette: {primary: green}})
+
 
 const blockstack = require("blockstack");
 
@@ -67,18 +62,19 @@ class Review extends Component {
         <Grid item xs={6} sm={7}>
           <Display data={this.state.data} />
         </Grid>
-        <Grid item xs={6} sm={3}>
-          
+        <Grid item xs={6} sm={3}>         
           <Grid container spacing={2} direction="column" alignItems="center" justify="center" style={{ minHeight: '100vh' }} >
             <Grid item xs={12}>
-            <button>Approve</button>
-            </Grid>
-            
+              <ThemeProvider theme={redTheme}>
+              <Button color="primary">Approve</Button>
+              </ThemeProvider>
+            </Grid>    
             <Grid item xs={12}>
-            <button>Deny</button>
+              <ThemeProvider theme={greenTheme}>
+              <Button color="secondary">Deny</Button>
+              </ThemeProvider>
             </Grid>
-          </Grid>
-          
+          </Grid>         
         </Grid>
       </Grid>
     );

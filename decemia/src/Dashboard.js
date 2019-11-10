@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { UserSession, AppConfig } from "blockstack";
-import Review from "./Review";
-import Card from "@material-ui/core/Card";
-import { makeStyles } from "@material-ui/core/styles";
+// import Review from "./Review";
+// import Card from "@material-ui/core/Card";
+// import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "./Sidebar";

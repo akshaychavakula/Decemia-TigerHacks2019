@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Document, Page, pdfjs, PDFViewer } from "react-pdf";
+import { Document, Page, pdfjs} from "react-pdf";
 import "./Display.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 class Display extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   state = {
     numPages: null,
