@@ -5,7 +5,19 @@
     overflow-y: scroll;
     overflow-x: scroll;
     margin: auto;
-     }
+}
+
+.right{
+    position: absolute;
+    right: 0px;
+    width: 300px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
 
 h1{
     text-align: center;
