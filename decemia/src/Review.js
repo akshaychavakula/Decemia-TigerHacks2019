@@ -1,29 +1,22 @@
-import React, {
-  Component
-} from "react";
-import {
-  UserSession,
-  AppConfig
-} from "blockstack";
+import React, { Component } from "react";
+import { UserSession, AppConfig } from "blockstack";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "./Sidebar";
 import Display from "./display/Display";
 import Button from "@material-ui/core/Button";
 import * as firebase from "firebase";
-import {
-  makeStyles
-} from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.pallete.text.secondary,
-  },
+    textAlign: "center",
+    color: theme.pallete.text.secondary
+  }
 }));
 
 const blockstack = require("blockstack");
@@ -32,15 +25,59 @@ class Review extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       data: "",
-      firebase: ""
+      firebase: "",
+      originalName: ""
     };
   }
 
   componentWillMount() {}
 
   approve() {
-    console.log();
+    const id = this.state.id;
+    const privKey = blockstack.loadUserData().appPrivateKey + "01";
+    const hash = blockstack.signProfileToken(id, privKey);
+    const username = blockstack.loadUserData().username;
+
+    firebase.default
+      .firestore()
+      .collection("papers")
+      .doc(id)
+      .update({
+        approvals: {
+          [username]: hash
+        }
+      })
+      .then(function() {
+        console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
+  }
+
+  deny() {
+    const id = this.state.id;
+    const privKey = blockstack.loadUserData().appPrivateKey + "01";
+    const hash = blockstack.signProfileToken(id, privKey);
+    const username = blockstack.loadUserData().username;
+
+    firebase.default
+      .firestore()
+      .collection("papers")
+      .doc(id)
+      .update({
+        denials: {
+          [username]: hash
+        }
+      })
+      .then(function() {
+        console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
   }
 
   componentDidMount() {
@@ -71,6 +108,7 @@ class Review extends Component {
         alert(e.message);
       });
 
+    this.setState({ id: id });
     console.log("ID: " + id);
 
     var docRef = firebase.default
@@ -80,7 +118,7 @@ class Review extends Component {
 
     docRef
       .get()
-      .then(function (doc) {
+      .then(function(doc) {
         if (doc.exists) {
           console.log("Document data:", doc.data());
           this.setState({
@@ -91,91 +129,48 @@ class Review extends Component {
           console.log("No such document!");
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("Error getting document:", error);
       });
   }
 
   //    <img src={logo} className="App-logo" alt="logo" />
   render() {
-    return ( <
-      Grid container spacing = {
-        2
-      } >
-      <
-      Grid item xs = {
-        6
-      }
-      sm = {
-        2
-      } >
-      <
-      div style = {
-        {
-          backgroundColor: "#000000",
-          height: "100vh"
-        }
-      } >
-      <
-      Sidebar / >
-      <
-      /div> <
-      /Grid> <
-      Grid item xs = {
-        6
-      }
-      sm = {
-        7
-      } >
-      <
-      Display data = {
-        this.state.data
-      }
-      /> <
-      /Grid> <
-      Grid item xs = {
-        6
-      }
-      sm = {
-        3
-      } >
-      <
-      Button onClick = {
-        this.approve.bind(this)
-      } > Approve < /Button>
-
-      <
-      Grid container spacing = {
-        2
-      }
-      direction = "column"
-      alignItems = "center"
-      justify = "center"
-      style = {
-        {
-          minHeight: '100vh'
-        }
-      } >
-      <
-      Grid item xs = {
-        12
-      } >
-      <
-      button > Approve < /button> <
-      /Grid>
-
-      <
-      Grid item xs = {
-        12
-      } >
-      <
-      button > Deny < /button> <
-      /Grid> <
-      /Grid>
-
-      <
-      /Grid> <
-      /Grid>
+    return (
+      <Grid container spacing={2}>
+        <Grid item xs={6} sm={2}>
+          <div
+            style={{
+              backgroundColor: "#000000",
+              height: "100vh"
+            }}
+          >
+            <Sidebar />
+          </div>
+        </Grid>
+        <Grid item xs={6} sm={7}>
+          <Display data={this.state.data} />
+        </Grid>
+        <Grid item xs={6} sm={3}>
+          <Grid
+            container
+            spacing={2}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{
+              minHeight: "100vh"
+            }}
+          >
+            <Grid item xs={12}>
+              <button onClick={this.approve.bind(this)}> Approve </button>
+            </Grid>
+            <Grid item xs={12}>
+              <button onClick={this.deny.bind(this)}> Deny </button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     );
   }
 }
