@@ -18,7 +18,17 @@ class Dashboard extends Component {
     this.userSession.signUserOut("/");
   }
 
-  componentWillMount() {}
+  componentWillMount() {
+    let files = [];
+    this.userSession
+      .listFiles(file => {
+        files.push(file);
+        return true;
+      })
+      .then(() => {
+        console.log(files);
+      });
+  }
 
   //    <img src={logo} className="App-logo" alt="logo" />
   //<Review id="ABCD" />

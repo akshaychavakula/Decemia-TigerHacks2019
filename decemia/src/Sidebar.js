@@ -65,16 +65,15 @@ class SideBar extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Drafts" />
           </ListItem>
-          <ListItem>
+          <ListItem button>
             <ListItemAvatar>
               <Avatar alt="" src="https://logo.clearbit.com/muhealth.org" />
             </ListItemAvatar>
             <ListItemText primary={this.state.user.profile.name} />
+            <ExitToAppIcon onClick={this.logout.bind(this)} color="primary" />
           </ListItem>
           <ListItem button>
-            <ListItemIcon>
-              <ExitToAppIcon onClick={this.logout.bind(this)} color="primary" />
-            </ListItemIcon>
+            <ListItemIcon></ListItemIcon>
           </ListItem>
         </List>
         <Divider />
