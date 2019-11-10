@@ -7,6 +7,10 @@ import Display from "./display/Display";
 import Button from "@material-ui/core/Button";
 import * as firebase from "firebase";
 import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,11 +32,13 @@ class Review extends Component {
       id: "",
       data: "",
       firebase: "",
-      originalName: ""
+      originalName: "",
+      approvals: [],
+      denials: []
     };
   }
 
-  componentWillMount() {}
+  componentDidMount() {}
 
   approve() {
     const id = this.state.id;
@@ -132,6 +138,14 @@ class Review extends Component {
       .catch(function(error) {
         console.log("Error getting document:", error);
       });
+
+    docRef.get().then(doc => {
+      const approvals = doc.data().approvals;
+      const denials = doc.data().denials;
+      this.setState({ approvals: approvals });
+      this.setState({ denials: denials });
+      console.log("Approvals" + JSON.stringify(this.state.approvals));
+    });
   }
 
   //    <img src={logo} className="App-logo" alt="logo" />
@@ -152,6 +166,7 @@ class Review extends Component {
           <Display data={this.state.data} />
         </Grid>
         <Grid item xs={6} sm={3}>
+          <List component="nav" aria-label="secondary mailbox folders"></List>
           <Grid
             container
             spacing={2}
