@@ -34,7 +34,7 @@ function App() {
           <Review id="ABCD" />
         </Route>
         <Route exact={true} path="/display">
-          <Display/>
+          <Display />
         </Route>
       </Switch>
     </Router>

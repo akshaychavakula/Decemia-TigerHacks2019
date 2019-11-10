@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { UserSession, AppConfig } from "blockstack";
+const blockstack = require("blockstack");
 
 class Login extends Component {
   constructor() {
@@ -15,13 +16,27 @@ class Login extends Component {
 
   componentWillMount() {
     const session = this.userSession;
+  }
+
+  componentDidMount() {
+    const session = this.userSession;
     if (session.isUserSignedIn()) {
-      window.location.href = "/upload";
+      window.location.href = "/dashboard";
     }
   }
 
   //    <img src={logo} className="App-logo" alt="logo" />
   render() {
+    if (blockstack.isUserSignedIn()) {
+      window.location.href = "/dashboard";
+    } else if (blockstack.isSignInPending()) {
+      blockstack.handlePendingSignIn().then(userData => {
+        window.location.href = "/dashboard";
+      });
+    }
+    if (this.userSession.isUserSignedIn()) {
+      window.location.href = "/dashboard";
+    }
     return (
       <div className="App">
         <header className="App-header">
