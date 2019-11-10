@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { UserSession, AppConfig } from "blockstack";
+import "./Login.css"
+import Grid from "@material-ui/core/Grid";
 const blockstack = require("blockstack");
 
 class Login extends Component {
@@ -27,6 +29,7 @@ class Login extends Component {
 
   //    <img src={logo} className="App-logo" alt="logo" />
   render() {
+    
     if (blockstack.isUserSignedIn()) {
       window.location.href = "/dashboard";
     } else if (blockstack.isSignInPending()) {
@@ -38,16 +41,21 @@ class Login extends Component {
       window.location.href = "/dashboard";
     }
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>Login to Decemia.</p>
-          <button
+      <div>
+        <div className="bg-image">
+          
+        </div>
+
+        <div className="bg-text">   
+          <h1>Welcome to Decemia</h1>
+          <h2> <button
             className="btn btn-lg btn-primary btn-block"
             onClick={this.signIn.bind(this)}
           >
             Sign in with Blockstack
-          </button>
-        </header>
+          </button></h2>
+          
+        </div>
       </div>
     );
   }
