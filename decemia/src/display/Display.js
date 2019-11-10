@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page, pdfjs, PDFViewer } from "react-pdf";
 import "./Display.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -15,6 +15,7 @@ class Display extends Component {
 
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
+    console.log("Data" + this.props.data.data);
   };
 
   render() {
@@ -22,11 +23,14 @@ class Display extends Component {
 
     return (
       <div>
+        {this.props.data.title}
         <Document
-          file={this.props.data}
+          file={this.props.data.data}
           onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}
         >
-          <Page pageNumber={pageNumber} />
+          {Array.from(new Array(numPages), (el, index) => (
+            <Page key={`page_${index + 1}`} pageNumber={index + 1} />
+          ))}
         </Document>
       </div>
     );

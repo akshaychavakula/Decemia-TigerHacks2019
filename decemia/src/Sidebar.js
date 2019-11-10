@@ -11,6 +11,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import MUIcon from "./muhealth.png";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AssignmentIcon from "@material-ui/icons/Assignment";
 const blockstack = require("blockstack");
 
 const useStyles = makeStyles(theme => ({
@@ -37,6 +38,10 @@ class SideBar extends React.Component {
     window.location.href = "/upload";
   }
 
+  goDashboard() {
+    window.location.href = "/dashboard";
+  }
+
   componentWillMount() {
     this.setState({ user: blockstack.loadUserData() });
   }
@@ -61,9 +66,12 @@ class SideBar extends React.Component {
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <DraftsIcon />
+              <AssignmentIcon color="primary" />
             </ListItemIcon>
-            <ListItemText primary="Drafts" />
+            <ListItemText
+              primary="Papers"
+              onClick={this.goDashboard.bind(this)}
+            />
           </ListItem>
           <ListItem button>
             <ListItemAvatar>

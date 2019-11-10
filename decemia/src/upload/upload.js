@@ -3,6 +3,11 @@ import "./upload.css";
 import Dropzone from "../dropzone/Dropzone";
 import Progress from "../progress/Progress";
 import { UserSession, AppConfig } from "blockstack";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Sidebar from "../Sidebar";
+import Display from "../display/Display";
+
 const MD5 = require("crypto-js/md5");
 const blockstack = require("blockstack");
 
@@ -14,7 +19,7 @@ class upload extends Component {
       uploading: false,
       uploadProgress: {},
       successfullUploaded: false,
-      hash: "",
+      hash: ""
     };
 
     const appConfig = new AppConfig(["store_write", "publish_data"]);
@@ -28,7 +33,7 @@ class upload extends Component {
     this.uploadFile = this.uploadFile.bind(this);
   }
 
-   uploadFiles = async () => {
+  uploadFiles = async () => {
     this.setState({ uploadProgress: {}, uploading: true });
     const promises = [];
     this.state.files.forEach(file => {
@@ -42,9 +47,9 @@ class upload extends Component {
       // Not Production ready! Do some error handling here instead...
       this.setState({ successfullUploaded: true, uploading: false });
     }
-  }
+  };
 
-  sendRequest = (file) => {
+  sendRequest = file => {
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
 
@@ -78,10 +83,10 @@ class upload extends Component {
       formData.append("file", file, file.name);
       this.uploadFile(file).bind(this);
     });
-  }
+  };
 
-  uploadFile = (file) => {
-    let fileName = "";
+  uploadFile = file => {
+    let originalFile = file;
     //Check File is not Empty
 
     // Select the very first file from list
@@ -93,18 +98,25 @@ class upload extends Component {
       file = fileLoadedEvent.target.result;
       // Print data in console
       console.log(file);
+      console.log(originalFile.name);
       //this.uploadToChain(file);
       const options = {
         encrypt: false
       };
 
+      var payload = {
+        data: file,
+        title: originalFile.name,
+        approvals: []
+      };
+
       var hash1 = MD5(file);
-      
+
       blockstack
-        .putFile(hash1, file, options)
+        .putFile(originalFile.name + ".json", JSON.stringify(payload), options)
         .then(results => {
           console.log(results);
-          window.location.href = "/dashboard?id=" + hash1
+          window.location.href = "/dashboard?id=" + hash1;
         })
         .finally(() => {
           console.log("Finally");
@@ -112,16 +124,13 @@ class upload extends Component {
     };
     // Convert data to base64
     fileReader.readAsDataURL(fileToLoad);
+  };
 
-    console.log(file);
-    console.log(fileName);
-  }
-
-  writeMD5 = (data) => {
+  writeMD5 = data => {
     this.setState({
       hash: data
-    })
-  }
+    });
+  };
 
   onFilesAdded(files) {
     this.setState(prevState => ({
@@ -174,33 +183,47 @@ class upload extends Component {
 
   render() {
     return (
-      <div className="Upload">
-        <span className="Title">Upload Files</span>
-        {this.state.hash.length > 0 ? (
-        <h2>
-         Success
-        </h2> ) : (<div className="Content">
-          <div>
-            <Dropzone
-              onFilesAdded={this.onFilesAdded}
-              disabled={this.state.uploading || this.state.successfullUploaded}
-            />
+      <Grid container spacing={2}>
+        <Grid item xs={6} sm={2}>
+          <div style={{ backgroundColor: "#000000", height: "100vh" }}>
+            <Sidebar />
           </div>
-          <div className="Files">
-            {this.state.files.map(file => {
-              return (
-                <div key={file.name} className="Row">
-                  <span className="Filename">{file.name}</span>
-                  {this.renderProgress(file)}
+        </Grid>
+        <Grid item xs={6} sm={7}>
+          <div className="Upload">
+            <span className="Title">Upload Files</span>
+            {this.state.hash.length > 0 ? (
+              <h2>Success</h2>
+            ) : (
+              <div className="Content">
+                <div>
+                  <Dropzone
+                    onFilesAdded={this.onFilesAdded}
+                    disabled={
+                      this.state.uploading || this.state.successfullUploaded
+                    }
+                  />
                 </div>
-              );
-            })}
+                <div className="Files">
+                  {this.state.files.map(file => {
+                    return (
+                      <div key={file.name} className="Row">
+                        <span className="Filename">{file.name}</span>
+                        {this.renderProgress(file)}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <div className="Actions">{this.renderActions()}</div>
           </div>
-        </div>)
-      }
-        
-        <div className="Actions">{this.renderActions()}</div>
-      </div>
+        </Grid>
+        <Grid item xs={6} sm={3}>
+          <Paper></Paper>
+        </Grid>
+      </Grid>
     );
   }
 }
