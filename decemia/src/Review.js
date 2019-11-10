@@ -5,7 +5,23 @@ import Grid from "@material-ui/core/Grid";
 import Sidebar from "./Sidebar";
 import Display from "./display/Display";
 import Button from "@material-ui/core/Button";
+<<<<<<< HEAD
 import * as firebase from "firebase";
+=======
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.pallete.text.secondary,
+  },
+}));
+
+>>>>>>> 3330fd838cb019d3f61873890ff7fb3a58506d8f
 const blockstack = require("blockstack");
 
 class Review extends Component {
@@ -83,7 +99,21 @@ class Review extends Component {
           <Display data={this.state.data} />
         </Grid>
         <Grid item xs={6} sm={3}>
+<<<<<<< HEAD
           <Button onClick={this.approve.bind(this)}>Approve</Button>
+=======
+          
+          <Grid container spacing={2} direction="column" alignItems="center" justify="center" style={{ minHeight: '100vh' }} >
+            <Grid item xs={12}>
+            <button>Approve</button>
+            </Grid>
+            
+            <Grid item xs={12}>
+            <button>Deny</button>
+            </Grid>
+          </Grid>
+          
+>>>>>>> 3330fd838cb019d3f61873890ff7fb3a58506d8f
         </Grid>
       </Grid>
     );
