@@ -53,7 +53,7 @@ class SideBar extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#000000", color: "#FFFFFF" }}>
-        Decemia
+          Decemia
         <List component="nav" aria-label="main mailbox folders">
           <ListItem button>
             <ListItemIcon>
