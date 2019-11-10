@@ -8,6 +8,9 @@ import Grid from "@material-ui/core/Grid";
 import Sidebar from "../Sidebar";
 // import Display from "../display/Display";
 import Card from "@material-ui/core/Card";
+
+import * as firebase from "firebase";
+
 const MD5 = require("crypto-js/md5");
 const blockstack = require("blockstack");
 
@@ -22,6 +25,7 @@ class upload extends Component {
       hash: ""
     };
 
+    // Initialize Firebase
     const appConfig = new AppConfig(["store_write", "publish_data"]);
     this.userSession = new UserSession({ appConfig });
 
@@ -116,7 +120,24 @@ class upload extends Component {
         .putFile(originalFile.name + ".json", JSON.stringify(payload), options)
         .then(results => {
           console.log(results);
-          window.location.href = "/dashboard?id=" + hash1;
+
+          firebase.default
+            .firestore()
+            .collection("papers")
+            .doc(originalFile.name + ".json")
+            .set({
+              url: results,
+              title: originalFile.name,
+              approvals: [],
+              denials: []
+            })
+            .then(function() {
+              window.location.href = "/dashboard?id=" + hash1;
+              console.log("Document successfully written!");
+            })
+            .catch(function(error) {
+              console.error("Error writing document: ", error);
+            });
         })
         .finally(() => {
           console.log("Finally");

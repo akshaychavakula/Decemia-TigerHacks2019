@@ -31,7 +31,7 @@ class ListPapers extends Component {
       })
       .then(() => {
         this.setState({ files: files });
-        console.log(files);
+        //console.log(files);
       });
   }
 
@@ -47,6 +47,7 @@ class ListPapers extends Component {
   render() {
     return (
       <div>
+        <h1>Papers</h1>
         <List component="nav" aria-label="secondary mailbox folders">
           {this.state.files.map(file => (
             <ListItem button onClick={() => this.goToPaper(file)}>
