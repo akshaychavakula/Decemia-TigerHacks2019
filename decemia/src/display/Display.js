@@ -23,14 +23,16 @@ class Display extends Component {
 
     return (
       <div>
-        {this.props.data.title}
+        <h1>{this.props.data.title}</h1>
         <Document
           file={this.props.data.data}
           onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}
         >
+          <div className="box"> 
           {Array.from(new Array(numPages), (el, index) => (
             <Page key={`page_${index + 1}`} pageNumber={index + 1} />
           ))}
+          </div>
         </Document>
       </div>
     );
