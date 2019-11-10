@@ -4,18 +4,24 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "./Sidebar";
 import Display from "./display/Display";
-
+import Button from "@material-ui/core/Button";
+import * as firebase from "firebase";
 const blockstack = require("blockstack");
 
 class Review extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: ""
+      data: "",
+      firebase: ""
     };
   }
 
   componentWillMount() {}
+
+  approve() {
+    console.log();
+  }
 
   componentDidMount() {
     var id = "";
@@ -40,6 +46,28 @@ class Review extends Component {
         console.log(e);
         alert(e.message);
       });
+
+    console.log("ID: " + id);
+
+    var docRef = firebase.default
+      .firestore()
+      .collection("papers")
+      .doc(id);
+
+    docRef
+      .get()
+      .then(function(doc) {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+          this.setState({ firebase: doc.data() });
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      })
+      .catch(function(error) {
+        console.log("Error getting document:", error);
+      });
   }
 
   //    <img src={logo} className="App-logo" alt="logo" />
@@ -55,7 +83,7 @@ class Review extends Component {
           <Display data={this.state.data} />
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper></Paper>
+          <Button onClick={this.approve.bind(this)}>Approve</Button>
         </Grid>
       </Grid>
     );
