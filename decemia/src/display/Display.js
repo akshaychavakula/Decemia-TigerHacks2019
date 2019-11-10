@@ -34,10 +34,7 @@ class Display extends Component {
           ))}
           </div>
         </Document>
-        <div className="right">
-            <button>Accept</button>
-            <button>Deny</button>
-        </div>
+        
       </div>
     );
   }

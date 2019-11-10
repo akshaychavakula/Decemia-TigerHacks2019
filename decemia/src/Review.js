@@ -4,6 +4,19 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "./Sidebar";
 import Display from "./display/Display";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.pallete.text.secondary,
+  },
+}));
 
 const blockstack = require("blockstack");
 
@@ -55,7 +68,17 @@ class Review extends Component {
           <Display data={this.state.data} />
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper></Paper>
+          
+          <Grid container spacing={2} direction="column" alignItems="center" justify="center" style={{ minHeight: '100vh' }} >
+            <Grid item xs={12}>
+            <button>Approve</button>
+            </Grid>
+            
+            <Grid item xs={12}>
+            <button>Deny</button>
+            </Grid>
+          </Grid>
+          
         </Grid>
       </Grid>
     );
