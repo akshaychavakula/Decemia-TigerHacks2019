@@ -13,7 +13,8 @@ class upload extends Component {
       files: [],
       uploading: false,
       uploadProgress: {},
-      successfullUploaded: false
+      successfullUploaded: false,
+      hash: "",
     };
 
     const appConfig = new AppConfig(["store_write", "publish_data"]);
@@ -23,10 +24,11 @@ class upload extends Component {
     this.uploadFiles = this.uploadFiles.bind(this);
     this.sendRequest = this.sendRequest.bind(this);
     this.renderActions = this.renderActions.bind(this);
-    this.uploadToChain = this.uploadToChain.bind(this);
+    this.writeMD5 = this.writeMD5.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
   }
 
-  async uploadFiles() {
+   uploadFiles = async () => {
     this.setState({ uploadProgress: {}, uploading: true });
     const promises = [];
     this.state.files.forEach(file => {
@@ -42,7 +44,7 @@ class upload extends Component {
     }
   }
 
-  sendRequest(file) {
+  sendRequest = (file) => {
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
 
@@ -74,11 +76,11 @@ class upload extends Component {
 
       const formData = new FormData();
       formData.append("file", file, file.name);
-      this.uploadFile(file);
+      this.uploadFile(file).bind(this);
     });
   }
 
-  uploadFile(file) {
+  uploadFile = (file) => {
     let fileName = "";
     //Check File is not Empty
 
@@ -96,12 +98,13 @@ class upload extends Component {
         encrypt: false
       };
 
-      var hash = MD5(file);
-
+      var hash1 = MD5(file);
+      
       blockstack
-        .putFile(hash, file, options)
+        .putFile(hash1, file, options)
         .then(results => {
           console.log(results);
+          window.location.href = "/dashboard?id=" + hash1
         })
         .finally(() => {
           console.log("Finally");
@@ -114,7 +117,11 @@ class upload extends Component {
     console.log(fileName);
   }
 
-  uploadToChain(data) {}
+  writeMD5 = (data) => {
+    this.setState({
+      hash: data
+    })
+  }
 
   onFilesAdded(files) {
     this.setState(prevState => ({
@@ -169,7 +176,10 @@ class upload extends Component {
     return (
       <div className="Upload">
         <span className="Title">Upload Files</span>
-        <div className="Content">
+        {this.state.hash.length > 0 ? (
+        <h2>
+         Success
+        </h2> ) : (<div className="Content">
           <div>
             <Dropzone
               onFilesAdded={this.onFilesAdded}
@@ -186,7 +196,9 @@ class upload extends Component {
               );
             })}
           </div>
-        </div>
+        </div>)
+      }
+        
         <div className="Actions">{this.renderActions()}</div>
       </div>
     );
