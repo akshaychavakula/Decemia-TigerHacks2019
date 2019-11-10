@@ -53,8 +53,12 @@ class SideBar extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: "#000000", color: "#FFFFFF" }}>
-          Decemia
-        <List component="nav" aria-label="main mailbox folders">
+        <List
+          component="nav"
+          aria-label="main mailbox folders"
+          style={{ padding: "10px" }}
+        >
+          <h2 style={{ paddingLeft: "46px" }}>Decemia</h2>
           <ListItem button>
             <ListItemIcon>
               <PublishIcon color="primary" />

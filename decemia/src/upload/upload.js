@@ -7,7 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "../Sidebar";
 import Display from "../display/Display";
-
+import Card from "@material-ui/core/Card";
 const MD5 = require("crypto-js/md5");
 const blockstack = require("blockstack");
 
@@ -190,35 +190,37 @@ class upload extends Component {
           </div>
         </Grid>
         <Grid item xs={6} sm={7}>
-          <div className="Upload">
-            <span className="Title">Upload Files</span>
-            {this.state.hash.length > 0 ? (
-              <h2>Success</h2>
-            ) : (
-              <div className="Content">
-                <div>
-                  <Dropzone
-                    onFilesAdded={this.onFilesAdded}
-                    disabled={
-                      this.state.uploading || this.state.successfullUploaded
-                    }
-                  />
+          <Card style={{ padding: "20px", margin: "10px" }}>
+            <div className="Upload">
+              <h1>Upload Articles</h1>
+              {this.state.hash.length > 0 ? (
+                <h2>Success</h2>
+              ) : (
+                <div className="Content">
+                  <div>
+                    <Dropzone
+                      onFilesAdded={this.onFilesAdded}
+                      disabled={
+                        this.state.uploading || this.state.successfullUploaded
+                      }
+                    />
+                  </div>
+                  <div className="Files">
+                    {this.state.files.map(file => {
+                      return (
+                        <div key={file.name} className="Row">
+                          <span className="Filename">{file.name}</span>
+                          {this.renderProgress(file)}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-                <div className="Files">
-                  {this.state.files.map(file => {
-                    return (
-                      <div key={file.name} className="Row">
-                        <span className="Filename">{file.name}</span>
-                        {this.renderProgress(file)}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+              )}
 
-            <div className="Actions">{this.renderActions()}</div>
-          </div>
+              <div className="Actions">{this.renderActions()}</div>
+            </div>
+          </Card>
         </Grid>
         <Grid item xs={6} sm={3}>
           <Paper></Paper>
