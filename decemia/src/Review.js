@@ -9,15 +9,15 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { red, green } from "@material-ui/core/colors";
 
-const redTheme = createMuiTheme({ palette: { primary: red } });
-const greenTheme = createMuiTheme({ palette: { primary: green } });
-
 import * as firebase from "firebase";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+
+const redTheme = createMuiTheme({ palette: { primary: red } });
+const greenTheme = createMuiTheme({ palette: { primary: green } });
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -173,6 +173,7 @@ class Review extends Component {
           <Display data={this.state.data} />
         </Grid>
         <Grid item xs={6} sm={3}>
+          <h1>{this.state.approvals}</h1>}
           <Grid
             container
             spacing={2}
