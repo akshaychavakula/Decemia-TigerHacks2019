@@ -139,12 +139,10 @@ class Review extends Component {
       sm = {
         3
       } >
-      <<
-      << << < HEAD <
+      <
       Button onClick = {
         this.approve.bind(this)
-      } > Approve < /Button> ===
-      === =
+      } > Approve < /Button>
 
       <
       Grid container spacing = {
@@ -175,8 +173,7 @@ class Review extends Component {
       /Grid> <
       /Grid>
 
-      >>>
-      >>> > 3330 fd838cb019d3f61873890ff7fb3a58506d8f <
+      <
       /Grid> <
       /Grid>
     );
