@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Sidebar from "./Sidebar";
+import ListPapers from "./ListPapers";
 class Dashboard extends Component {
   constructor() {
     super();
@@ -16,18 +17,6 @@ class Dashboard extends Component {
   signOut(e) {
     e.preventDefault();
     this.userSession.signUserOut("/");
-  }
-
-  componentWillMount() {
-    let files = [];
-    this.userSession
-      .listFiles(file => {
-        files.push(file);
-        return true;
-      })
-      .then(() => {
-        console.log(files);
-      });
   }
 
   //    <img src={logo} className="App-logo" alt="logo" />
@@ -43,6 +32,7 @@ class Dashboard extends Component {
           </Grid>
           <Grid item xs={6} sm={7}>
             <Review id="ABCD" />
+            <ListPapers />
           </Grid>
           <Grid item xs={6} sm={3}>
             <Paper></Paper>
