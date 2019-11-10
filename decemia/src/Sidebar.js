@@ -10,7 +10,7 @@ import DraftsIcon from "@material-ui/icons/Drafts";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import MUIcon from "./muhealth.png";
-
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 const blockstack = require("blockstack");
 
 const useStyles = makeStyles(theme => ({
@@ -41,6 +41,10 @@ class SideBar extends React.Component {
     this.setState({ user: blockstack.loadUserData() });
   }
 
+  logout() {
+    blockstack.signUserOut("/");
+  }
+
   render() {
     return (
       <div style={{ backgroundColor: "#000000", color: "#FFFFFF" }}>
@@ -61,11 +65,16 @@ class SideBar extends React.Component {
             </ListItemIcon>
             <ListItemText primary="Drafts" />
           </ListItem>
-          <ListItem button>
+          <ListItem>
             <ListItemAvatar>
               <Avatar alt="" src="https://logo.clearbit.com/muhealth.org" />
             </ListItemAvatar>
             <ListItemText primary={this.state.user.profile.name} />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <ExitToAppIcon onClick={this.logout.bind(this)} color="primary" />
+            </ListItemIcon>
           </ListItem>
         </List>
         <Divider />
