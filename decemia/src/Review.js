@@ -173,7 +173,6 @@ class Review extends Component {
           <Display data={this.state.data} />
         </Grid>
         <Grid item xs={6} sm={3}>
-          <h1>{this.state.approvals}</h1>}
           <Grid
             container
             spacing={2}
