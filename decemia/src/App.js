@@ -30,12 +30,7 @@ function App() {
         <Route exact={true} path="/upload">
           <Upload />
         </Route>
-        <Route exact={true} path="/review">
-          <Review id="ABCD" />
-        </Route>
-        <Route exact={true} path="/display">
-          <Display />
-        </Route>
+        <Route exact={true} path="/paper/:id" component={Review} />
       </Switch>
     </Router>
   );

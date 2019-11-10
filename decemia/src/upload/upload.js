@@ -108,10 +108,10 @@ class upload extends Component {
       var hash1 = MD5(file);
 
       blockstack
-        .putFile(hash1 + ".json", JSON.stringify(payload), options)
+        .putFile(originalFile.name + ".json", JSON.stringify(payload), options)
         .then(results => {
           console.log(results);
-          //window.location.href = "/dashboard?id=" + hash1;
+          window.location.href = "/dashboard?id=" + hash1;
         })
         .finally(() => {
           console.log("Finally");

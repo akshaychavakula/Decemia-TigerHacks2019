@@ -15,6 +15,7 @@ class Display extends Component {
 
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
+    console.log("Data" + this.props.data.data);
   };
 
   render() {
@@ -22,8 +23,9 @@ class Display extends Component {
 
     return (
       <div>
+        {this.props.data.title}
         <Document
-          file={this.props.data}
+          file={this.props.data.data}
           onLoadSuccess={this.onDocumentLoadSuccess.bind(this)}
         >
           <Page pageNumber={pageNumber} />

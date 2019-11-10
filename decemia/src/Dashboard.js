@@ -31,7 +31,6 @@ class Dashboard extends Component {
             </div>
           </Grid>
           <Grid item xs={6} sm={7}>
-            <Review id="ABCD" />
             <ListPapers />
           </Grid>
           <Grid item xs={6} sm={3}>

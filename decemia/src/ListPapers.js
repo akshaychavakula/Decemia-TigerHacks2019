@@ -36,7 +36,7 @@ class ListPapers extends Component {
   }
 
   goToPaper(id) {
-    window.location.href = "/papers/" + id;
+    window.location.href = "/paper/" + id;
   }
 
   componentDidMount() {
